@@ -1,9 +1,24 @@
 .vagrant
-/cookbooks
+Berksfile.lock
+*~
+*#
+.#*
+\#*#
+.*.sw[a-z]
+*.un~
+*.iso
 
 # Bundler
+Gemfile.lock
 bin/*
 .bundle/*
 
 .kitchen/
 .kitchen.local.yml
+
+# OS
+.DS_Store
+Icon?
+nohup.out
+ehthumbs.db
+Thumbs.db
