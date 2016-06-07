@@ -38,7 +38,7 @@ describe file('/opt/taurus/.bzt-rc') do
   its(:content) { should eq content }
 end
 
-describe command('/bin/bzt -h') do
+describe command('bzt -h') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match %r{BlazeMeter Taurus Tool v1.6.1} }
 end
@@ -65,7 +65,7 @@ describe command('/opt/taurus/tools/jmeter/bin/jmeter --version') do
   its(:stdout) { should match %r{Version 2.13} }
 end
 
-describe command('/bin/locust --version 2>&1') do
+describe command('locust --version 2>&1') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match %r{Locust 0.7.5} }
 end
