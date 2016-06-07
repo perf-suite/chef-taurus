@@ -18,6 +18,11 @@ default['taurus']['settings']['artifacts-dir'] = '/tmp/taurus-%Y-%m-%d_%H-%M-%S.
 default['taurus']['package']['list'] = ['python-devel', 'python-pip',
                                         'python-virtualenv', 'libxml2-devel',
                                         'libxslt-devel', 'zlib']
+
+default['taurus']['package']['list_ubuntu'] = ['python-dev', 'python-pip',
+                                               'python-virtualenv', 'libxml2-dev',
+                                               'libxslt1-dev', 'zlib1g']
+
 default['taurus']['python']['list'] = %w(lxml psutil pyzmq gevent)
 
 # JMeter

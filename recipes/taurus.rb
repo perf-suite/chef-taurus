@@ -5,6 +5,7 @@
 
 user node['taurus']['user'] do
   home node['taurus']['home']
+  shell '/bin/bash'
   action :create
 end
 
@@ -16,6 +17,7 @@ directory node['taurus']['home'] do
   action :create
   owner node['taurus']['user']
   group node['taurus']['group']
+  mode '0700'
 end
 
 directory "#{node['taurus']['home']}/.bzt" do
