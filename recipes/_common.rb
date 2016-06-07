@@ -5,10 +5,14 @@
 
 include_recipe 'ark'
 include_recipe 'build-essential'
-include_recipe 'yum-epel'
+
+include_recipe 'yum-epel' if node['platform_family'] == 'centos'
+include_recipe 'apt' if node['platform_family'] == 'ubuntu'
+
 include_recipe 'python'
 
-package_list = node['taurus']['package']['list']
+package_list = value_for_platform('ubuntu' => { 'default' => node['taurus']['package']['list_ubuntu'] },
+                                  'default' => node['taurus']['package']['list'])
 
 package_list.each do |package_name|
   package package_name do

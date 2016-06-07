@@ -9,9 +9,11 @@ source_url 'https://github.com/perf-suite/taurus'
 issues_url 'https://github.com/perf-suite/taurus/issues'
 
 supports 'centos'
+supports 'ubuntu'
 
 depends 'ark'
 depends 'build-essential'
+depends 'apt'
 depends 'yum-epel'
 depends 'java'
 depends 'python'
