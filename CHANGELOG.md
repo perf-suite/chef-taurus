@@ -1,6 +1,10 @@
 taurus CHANGELOG
 ==============================
 
+# 2.1.1
+
+Fix platform selection for installation of yum-epel/apt
+
 # 2.1.0
 
 Add support for the Apache Benchmark Engine
