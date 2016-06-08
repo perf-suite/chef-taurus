@@ -6,8 +6,8 @@
 include_recipe 'ark'
 include_recipe 'build-essential'
 
-include_recipe 'yum-epel' if node['platform_family'] == 'centos'
-include_recipe 'apt' if node['platform_family'] == 'ubuntu'
+include_recipe 'yum-epel' if node['platform'] == 'centos'
+include_recipe 'apt' if node['platform'] == 'ubuntu'
 
 include_recipe 'python'
 

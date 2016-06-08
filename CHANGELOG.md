@@ -1,7 +1,7 @@
 taurus CHANGELOG
 ==============================
 
-# 2.1.1
+# 2.1.2
 
 Fix platform selection for installation of yum-epel/apt
 
