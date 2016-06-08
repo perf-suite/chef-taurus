@@ -69,3 +69,8 @@ describe command('locust --version 2>&1') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match %r{Locust 0.7.5} }
 end
+
+describe command('ab -V 2>&1') do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should match %r{ApacheBench, Version 2} }
+end
