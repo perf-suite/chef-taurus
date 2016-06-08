@@ -4,6 +4,7 @@
 default['java']['jdk_version'] = '7'
 default['taurus']['jmeter_support'] = true
 default['taurus']['locustio_support'] = true
+default['taurus']['ab_support'] = true
 
 default['taurus']['user'] = 'taurus'
 default['taurus']['group'] = 'taurus'
@@ -39,8 +40,11 @@ default['taurus']['jmeter']['plugins']['mirror_source'] = 'http://jmeter-plugins
 # LocustIO
 default['taurus']['locustio']['version'] = '0.7.5'
 
+# Apache Benchmark
+default['taurus']['ab']['package']['list'] = ['httpd-tools']
+default['taurus']['ab']['package']['list_ubuntu'] = ['apache2-utils']
+
 # TODO: Support additional performance tools
-# ab
 # gatling
 # seige
 # tsung
