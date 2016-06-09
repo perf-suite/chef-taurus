@@ -1,6 +1,10 @@
 taurus CHANGELOG
 ==============================
 
+# 2.2.0
+
+Add support for the Siege Engine
+
 # 2.1.2
 
 Fix platform selection for installation of yum-epel/apt

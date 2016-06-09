@@ -5,6 +5,7 @@ default['java']['jdk_version'] = '7'
 default['taurus']['jmeter_support'] = true
 default['taurus']['locustio_support'] = true
 default['taurus']['ab_support'] = true
+default['taurus']['siege_support'] = true
 
 default['taurus']['user'] = 'taurus'
 default['taurus']['group'] = 'taurus'
@@ -44,7 +45,10 @@ default['taurus']['locustio']['version'] = '0.7.5'
 default['taurus']['ab']['package']['list'] = ['httpd-tools']
 default['taurus']['ab']['package']['list_ubuntu'] = ['apache2-utils']
 
+# Siege
+default['taurus']['siege']['package']['list'] = ['siege']
+default['taurus']['siege']['package']['list_ubuntu'] = ['siege']
+
 # TODO: Support additional performance tools
 # gatling
-# seige
 # tsung
