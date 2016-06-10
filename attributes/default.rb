@@ -6,6 +6,7 @@ default['taurus']['jmeter_support'] = true
 default['taurus']['locustio_support'] = true
 default['taurus']['ab_support'] = true
 default['taurus']['siege_support'] = true
+default['taurus']['gatling_support'] = true
 
 default['taurus']['user'] = 'taurus'
 default['taurus']['group'] = 'taurus'
@@ -49,6 +50,11 @@ default['taurus']['ab']['package']['list_ubuntu'] = ['apache2-utils']
 default['taurus']['siege']['package']['list'] = ['siege']
 default['taurus']['siege']['package']['list_ubuntu'] = ['siege']
 
+# Gatling
+default['taurus']['gatling']['version'] = '2.1.7'
+default['taurus']['gatling']['path'] = "#{node['taurus']['home']}/tools/gatling"
+default['taurus']['gatling']['mirror_source'] = "https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/#{node['taurus']['gatling']['version']}"
+default['taurus']['gatling']['source_url'] = "#{node['taurus']['gatling']['mirror_source']}/gatling-charts-highcharts-bundle-#{node['taurus']['gatling']['version']}-bundle.zip"
+
 # TODO: Support additional performance tools
-# gatling
 # tsung

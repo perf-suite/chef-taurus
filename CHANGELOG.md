@@ -1,6 +1,10 @@
 taurus CHANGELOG
 ==============================
 
+# 2.3.0
+
+Add support for the Gatling Engine
+
 # 2.2.0
 
 Add support for the Siege Engine

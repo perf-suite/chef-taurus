@@ -32,7 +32,10 @@ template "#{node['taurus']['home']}/.bzt-rc" do
     check_interval: node['taurus']['settings']['check-interval'],
     default_executor: node['taurus']['settings']['default-executor'],
     artifacts_dir: node['taurus']['settings']['artifacts-dir'],
-    jmeter_path: node['taurus']['jmeter']['path']
+    jmeter_support: node['taurus']['jmeter_support'],
+    jmeter_path: node['taurus']['jmeter']['path'],
+    gatling_support: node['taurus']['gatling_support'],
+    gatling_path: node['taurus']['gatling']['path']
   )
   source 'bzt-rc.erb'
   owner node['taurus']['user']
