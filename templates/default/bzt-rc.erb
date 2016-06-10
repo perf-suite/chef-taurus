@@ -6,5 +6,11 @@ settings:
   artifacts-dir: <%= @artifacts_dir %>
 
 modules:
+<% if @jmeter_support %>
   jmeter:
     path: <%= @jmeter_path %>
+<% end %>
+<% if @gatling_support %>
+  gatling:
+    path: <%= @gatling_path %>
+<% end %>

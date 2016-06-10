@@ -27,7 +27,9 @@ content = [
   '',
   'modules:',
   '  jmeter:',
-  '    path: /opt/taurus/tools/jmeter'
+  '    path: /opt/taurus/tools/jmeter',
+  '  gatling:',
+  '    path: /opt/taurus/tools/gatling'
 ].join("\n") << "\n"
 
 describe file('/opt/taurus/.bzt-rc') do
@@ -78,4 +80,15 @@ end
 describe command('siege --version 2>&1') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match %r{SIEGE 3} }
+end
+
+describe file('/opt/taurus/tools/gatling') do
+  it { should be_directory }
+  it { should be_owned_by 'taurus' }
+  it { should be_mode 755 }
+end
+
+describe command('/opt/taurus/tools/gatling/bin/gatling.sh --help 2>&1') do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should match %r{GATLING_HOME is set to /opt/taurus/tools/gatling} }
 end
