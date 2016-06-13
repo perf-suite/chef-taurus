@@ -10,4 +10,3 @@ ark 'tsung' do
   url node['taurus']['tsung']['source_url']
   action :install_with_make
 end
-
