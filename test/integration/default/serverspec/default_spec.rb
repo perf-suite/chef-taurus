@@ -92,3 +92,12 @@ describe command('/opt/taurus/tools/gatling/bin/gatling.sh --help 2>&1') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match %r{GATLING_HOME is set to /opt/taurus/tools/gatling} }
 end
+
+describe command('erl -eval \'erlang:display(erlang:system_info(otp_release)), halt().\'  -noshell 2>&1') do
+  its(:exit_status) { should eq 0 }
+end
+
+describe command('tsung -v 2>&1') do
+  its(:exit_status) { should eq 0 }
+  its(:stdout) { should match %r{Tsung version 1.6} }
+end

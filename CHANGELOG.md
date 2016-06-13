@@ -1,6 +1,10 @@
 taurus CHANGELOG
 ==============================
 
+# 2.4.0
+
+Add support for the Tsung Engine
+
 # 2.3.0
 
 Add support for the Gatling Engine

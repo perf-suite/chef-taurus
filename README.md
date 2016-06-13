@@ -7,14 +7,14 @@ Configures a system with taurus to execute performance testing.
 
 Using the following Open Source Performance Tools
 
-[Apache JMeter][4] using [best practices][5]
-[Locustio locust][6] using [installation instructions][7]
+- [Apache JMeter][4] using [best practices][5]
+- [Locustio locust][6] using [installation instructions][7]
+- [Tsung][14] using [installation instructions][15]
 
 Additional tools to follow in later release.
 ab
 gatling
 seige
-tsung
 
 Requirements
 ------------
@@ -27,14 +27,19 @@ The dependency cookbooks are:
 - [yum-epel][12]
 - [java][10]
 - [python][11]
+- [erlang][16]
 
 #### Attributes
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
 ['taurus']['jdk_version'] | String | Version of JDK to install | '7'
+['taurus']['erlang']['gui_tools'] | String | (Tsung) Whether to install the GUI tools for Erlang | 'false'
+['taurus']['erlang']['install_method'] | String | (Tsung) Erlang installation method | 'package'
+
 ['taurus']['jmeter_support'] | Bool | Enable support for Apache JMeter | 'true'
 ['taurus']['locustio_support'] | Bool | Enable support for Locust | 'true'
+['taurus']['tsung_support'] | Bool | Enable support for Tsung | 'true'
 ['taurus']['user'] | String | User for executing load test | 'taurus'
 ['taurus']['group'] | String | Group associated to running load test | 'taurus'
 ['taurus']['home'] | String | Home Folder for User | '/opt/taurus'
@@ -57,9 +62,16 @@ Key | Type | Description | Default
 --- | ---- | ----------- | -------
 ['taurus']['locustio']['version'] | String | Version of Locust to install| '0.7.5'
 
+Key | Type | Description | Default
+--- | ---- | ----------- | -------
+['taurus']['tsung']['version'] | String | Version of Tsung| '1.6.0'
+['taurus']['tsung']['mirror_source'] | String | Website to pull packages | 'http://tsung.erlang-projects.org/dist'
+['taurus']['tsung']['source_url'] | String | Download link for Tsung| '#{node['taurus']['tsung']['mirror_source']}/tsung-#{node['taurus']['tsung']['version']}.tar.gz'
+
 #### Supported Platforms
 
 - Centos 7.1
+- Ubuntu 16.04
 
 Usage
 -----
@@ -81,3 +93,7 @@ Maintainers
 [11]: https://github.com/poise/python
 [12]: https://github.com/chef-cookbooks/yum-epel
 [13]: https://github.com/chef-cookbooks/build-essential
+[14]: http://tsung.erlang-projects.org/
+[15]: http://tsung.erlang-projects.org/user_manual/installation.html
+[16]: https://github.com/chef-cookbooks/erlang
+
