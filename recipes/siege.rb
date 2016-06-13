@@ -1,6 +1,6 @@
 #
 # Cookbook Name:: taurus
-# Recipe:: siege 
+# Recipe:: siege
 #
 
 package_list = value_for_platform('ubuntu' => { 'default' => node['taurus']['siege']['package']['list_ubuntu'] },
