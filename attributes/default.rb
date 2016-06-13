@@ -1,12 +1,16 @@
 #
 # Cookbook Name:: taurus
-#
+
 default['java']['jdk_version'] = '7'
+default['erlang']['gui_tools'] = false
+default['erlang']['install_method'] = 'package'
+
 default['taurus']['jmeter_support'] = true
 default['taurus']['locustio_support'] = true
 default['taurus']['ab_support'] = true
 default['taurus']['siege_support'] = true
 default['taurus']['gatling_support'] = true
+default['taurus']['tsung_support'] = true
 
 default['taurus']['user'] = 'taurus'
 default['taurus']['group'] = 'taurus'
@@ -56,5 +60,7 @@ default['taurus']['gatling']['path'] = "#{node['taurus']['home']}/tools/gatling"
 default['taurus']['gatling']['mirror_source'] = "https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/#{node['taurus']['gatling']['version']}"
 default['taurus']['gatling']['source_url'] = "#{node['taurus']['gatling']['mirror_source']}/gatling-charts-highcharts-bundle-#{node['taurus']['gatling']['version']}-bundle.zip"
 
-# TODO: Support additional performance tools
-# tsung
+# Tsung
+default['taurus']['tsung']['version'] = '1.6.0'
+default['taurus']['tsung']['mirror_source'] = 'http://tsung.erlang-projects.org/dist'
+default['taurus']['tsung']['source_url'] = "#{node['taurus']['tsung']['mirror_source']}/tsung-#{node['taurus']['tsung']['version']}.tar.gz"
