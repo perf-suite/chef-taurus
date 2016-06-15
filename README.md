@@ -1,20 +1,20 @@
 # taurus Cookbook
 =======================
 
+[![Build Status](https://travis-ci.org/perf-suite/chef-taurus.svg?branch=master)](https://travis-ci.org/perf-suite/chef-taurus)
+
 Configures a system with taurus to execute performance testing.
 
 [Blazemeter Taurus][2] using [installation instructions][3]
 
 Using the following Open Source Performance Tools
 
+- [Apache Benchmark][19]
 - [Apache JMeter][4] using [best practices][5]
+- [Gatling][18]
 - [Locustio locust][6] using [installation instructions][7]
+- [Siege][17]
 - [Tsung][14] using [installation instructions][15]
-
-Additional tools to follow in later release.
-ab
-gatling
-seige
 
 Requirements
 ------------
@@ -24,6 +24,7 @@ Requirements
 The dependency cookbooks are:
 - [ark][9]
 - [build-essential][13]
+- [apt][20]
 - [yum-epel][12]
 - [java][10]
 - [python][11]
@@ -31,19 +32,25 @@ The dependency cookbooks are:
 
 #### Attributes
 
+[Blazemeter Taurus][2] global attributes
+
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
 ['taurus']['jdk_version'] | String | Version of JDK to install | '7'
 ['taurus']['erlang']['gui_tools'] | String | (Tsung) Whether to install the GUI tools for Erlang | 'false'
 ['taurus']['erlang']['install_method'] | String | (Tsung) Erlang installation method | 'package'
-
 ['taurus']['jmeter_support'] | Bool | Enable support for Apache JMeter | 'true'
 ['taurus']['locustio_support'] | Bool | Enable support for Locust | 'true'
+['taurus']['ab_support'] | Bool | Enable support for Apache Benchmark | 'true'
+['taurus']['siege_support'] | Bool | Enable support for Siege | 'true'
+['taurus']['gatling_support'] | Bool | Enable support for Gatling | 'true'
 ['taurus']['tsung_support'] | Bool | Enable support for Tsung | 'true'
 ['taurus']['user'] | String | User for executing load test | 'taurus'
 ['taurus']['group'] | String | Group associated to running load test | 'taurus'
 ['taurus']['home'] | String | Home Folder for User | '/opt/taurus'
 ['taurus']['version'] | String | Specific version of Taurus to install | '1.6.1
+
+[Apache JMeter][4] 
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
@@ -52,15 +59,29 @@ Key | Type | Description | Default
 ['taurus']['jmeter']['mirror_source'] | String | Website to pull packages | 'https://archive.apache.org/dist/jmeter/binaries'
 ['taurus']['jmeter']['source_url'] | String | Download link for Apache JMeter | "#{node['taurus']['jmeter']['mirror_source']}/apache-jmeter-#{node['taurus']['jmeter']['version']}.zip"
 
+[Apache JMeter Plugins][22] 
+
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
 ['taurus']['jmeter']['plugins']['version'] | String | Version of Apache JMeter Plugin | '1.4.0'
 ['taurus']['jmeter']['plugins']['list'] | Array | Plugins to install for Apache JMeter | 'Standard Extras ExtrasLibs WebDriver XMPP Hadoop'
 ['taurus']['jmeter']['plugins']['mirror_source'] | String | Website to pull packages | 'http://jmeter-plugins.org/files'
 
+[Gatling][18] attributes
+['taurus']['gatling']['version'] | String | Version of Gatling| '2.1.7'
+['taurus']['gatling']['path'] | String | Default path to install Gatling | '/opt/taurus/tools/gatling'
+['taurus']['gatling']['mirror_source'] | String | Website to pull packages | 'https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/#{node['taurus']['gatling']['version']}'
+['taurus']['gatling']['source_url'] | String | Download link for Gatling | "#{node['taurus']['gatling']['mirror_source']}/gatling-charts-highcharts-bundle-#{node['taurus']['gatling']['version']}-bundle.zip"
+
+[Locustio locust][6] attributes
+
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
 ['taurus']['locustio']['version'] | String | Version of Locust to install| '0.7.5'
+
+- [Siege][17] attributes
+
+- [Tsung][14] attributes
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
@@ -96,4 +117,11 @@ Maintainers
 [14]: http://tsung.erlang-projects.org/
 [15]: http://tsung.erlang-projects.org/user_manual/installation.html
 [16]: https://github.com/chef-cookbooks/erlang
+[17]: https://www.joedog.org/siege-home
+[18]: http://gatling.io/
+[19]: https://github.com/gatling/gatling
+[20]: https://github.com/chef-cookbooks/apt
+[21]: https://supermarket.chef.io/cookbooks/taurus
+[22]: http://jmeter-plugins.org
+
 

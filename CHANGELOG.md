@@ -1,6 +1,10 @@
 taurus CHANGELOG
 ==============================
 
+# 2.4.1
+
+Update documentation and include CI references
+
 # 2.4.0
 
 Add support for the Tsung Engine
