@@ -8,4 +8,8 @@ describe 'taurus::default' do
   it { expect(chef_run).to include_recipe('taurus::taurus') }
   it { expect(chef_run).to include_recipe('taurus::jmeter') }
   it { expect(chef_run).to include_recipe('taurus::locustio') }
+  it { expect(chef_run).to include_recipe('taurus::ab') }
+  it { expect(chef_run).to include_recipe('taurus::siege') }
+  it { expect(chef_run).to include_recipe('taurus::gatling') }
+  it { expect(chef_run).to include_recipe('taurus::tsung') }
 end

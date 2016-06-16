@@ -33,7 +33,7 @@ default['taurus']['package']['list_ubuntu'] = ['python-dev', 'python-pip',
 default['taurus']['python']['list'] = %w(lxml psutil pyzmq gevent)
 
 # JMeter
-default['taurus']['jmeter']['version'] = '2.13' # 3.0
+default['taurus']['jmeter']['version'] = '3.0'
 default['taurus']['jmeter']['path'] = "#{node['taurus']['home']}/tools/jmeter"
 default['taurus']['jmeter']['mirror_source'] = 'https://archive.apache.org/dist/jmeter/binaries'
 default['taurus']['jmeter']['source_url'] = "#{node['taurus']['jmeter']['mirror_source']}/apache-jmeter-#{node['taurus']['jmeter']['version']}.zip"
@@ -47,12 +47,10 @@ default['taurus']['jmeter']['plugins']['mirror_source'] = 'http://jmeter-plugins
 default['taurus']['locustio']['version'] = '0.7.5'
 
 # Apache Benchmark
-default['taurus']['ab']['package']['list'] = ['httpd-tools']
-default['taurus']['ab']['package']['list_ubuntu'] = ['apache2-utils']
+default['taurus']['ab']['version'] = nil
 
 # Siege
-default['taurus']['siege']['package']['list'] = ['siege']
-default['taurus']['siege']['package']['list_ubuntu'] = ['siege']
+default['taurus']['siege']['version'] = nil
 
 # Gatling
 default['taurus']['gatling']['version'] = '2.1.7'
