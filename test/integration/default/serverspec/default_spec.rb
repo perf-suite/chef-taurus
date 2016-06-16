@@ -64,7 +64,7 @@ end
 
 describe command('/opt/taurus/tools/jmeter/bin/jmeter --version') do
   its(:exit_status) { should eq 0 }
-  its(:stdout) { should match %r{Version 2.13} }
+  its(:stdout) { should match %r{3.0} }
 end
 
 describe command('locust --version 2>&1') do

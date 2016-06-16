@@ -1,13 +1,13 @@
 # taurus Cookbook
-=======================
 
+[![Chef cookbook](https://img.shields.io/cookbook/v/taurus.svg?maxAge=2592000?style=flat-square)](https://supermarket.chef.io/cookbooks/taurus)
 [![Build Status](https://travis-ci.org/perf-suite/chef-taurus.svg?branch=master)](https://travis-ci.org/perf-suite/chef-taurus)
 
-Configures a system with taurus to execute performance testing.
+This cookbook installs and configures a system with taurus to execute performance testing.
 
 [Blazemeter Taurus][2] using [installation instructions][3]
 
-Using the following Open Source Performance Tools
+Includes support for the following Open Source Performance Tools
 
 - [Apache Benchmark][19]
 - [Apache JMeter][4] using [best practices][5]
@@ -54,7 +54,7 @@ Key | Type | Description | Default
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
-['taurus']['jmeter']['version'] | String | Version of Apache JMeter to install | '2.13'
+['taurus']['jmeter']['version'] | String | Version of Apache JMeter to install | '3.0'
 ['taurus']['jmeter']['path'] | String | Default path to install Apache JMeter | '/opt/taurus/tools/jmeter'
 ['taurus']['jmeter']['mirror_source'] | String | Website to pull packages | 'https://archive.apache.org/dist/jmeter/binaries'
 ['taurus']['jmeter']['source_url'] | String | Download link for Apache JMeter | "#{node['taurus']['jmeter']['mirror_source']}/apache-jmeter-#{node['taurus']['jmeter']['version']}.zip"
@@ -67,7 +67,12 @@ Key | Type | Description | Default
 ['taurus']['jmeter']['plugins']['list'] | Array | Plugins to install for Apache JMeter | 'Standard Extras ExtrasLibs WebDriver XMPP Hadoop'
 ['taurus']['jmeter']['plugins']['mirror_source'] | String | Website to pull packages | 'http://jmeter-plugins.org/files'
 
+- [Apache Benchmark][19] attributes
+
+['taurus']['ab']['version'] | String | Version of Apache Benchmark| 'nil'
+
 [Gatling][18] attributes
+
 ['taurus']['gatling']['version'] | String | Version of Gatling| '2.1.7'
 ['taurus']['gatling']['path'] | String | Default path to install Gatling | '/opt/taurus/tools/gatling'
 ['taurus']['gatling']['mirror_source'] | String | Website to pull packages | 'https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/#{node['taurus']['gatling']['version']}'
@@ -80,6 +85,8 @@ Key | Type | Description | Default
 ['taurus']['locustio']['version'] | String | Version of Locust to install| '0.7.5'
 
 - [Siege][17] attributes
+
+['taurus']['siege']['version'] | String | Version of Siege| 'nil'
 
 - [Tsung][14] attributes
 

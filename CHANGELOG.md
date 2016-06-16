@@ -1,6 +1,11 @@
 taurus CHANGELOG
 ==============================
 
+# 2.4.2
+
+Hotfix for spec test, de-duplicate jmeter-plugin ark downloads (remove CHEF-3694 warnings)
+Cleanup package installation for tools and compact variables used.
+
 # 2.4.1
 
 Update documentation and include CI references

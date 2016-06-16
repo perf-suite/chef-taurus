@@ -13,10 +13,10 @@ directory node['taurus']['jmeter']['path'] do
 end
 
 ark 'jmeter' do
-  action :put
   url node['taurus']['jmeter']['source_url']
   path "#{node['taurus']['home']}/tools"
   owner node['taurus']['user']
+  action :put
 end
 
 jmeter_binaries = ['bin/jmeter', 'bin/jmeter-server', 'bin/ApacheJMeter.jar']
@@ -33,11 +33,11 @@ plugin_list = node['taurus']['jmeter']['plugins']['list']
 
 plugin_list.each do |plugin_name|
   plugin_url = "JMeterPlugins-#{plugin_name}-#{plugin_version}.zip"
-  ark 'lib' do
-    action :put
+  ark "jmeter-plugin-#{plugin_name}" do
     url "#{plugin_mirror}/#{plugin_url}"
-    path node['taurus']['jmeter']['path']
+    path "#{node['taurus']['jmeter']['path']}/lib"
     owner node['taurus']['user']
+    action :dump
   end
 end
 
