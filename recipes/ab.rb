@@ -3,11 +3,10 @@
 # Recipe:: ab
 #
 
-package_list = value_for_platform('ubuntu' => { 'default' => node['taurus']['ab']['package']['list_ubuntu'] },
-                                  'default' => node['taurus']['ab']['package']['list'])
+pkg_name = 'httpd-tools'
+pkg_name = 'apache2-utils' if node['platform'] == 'ubuntu'
 
-package_list.each do |package_name|
-  package package_name do
-    action :install
-  end
+package pkg_name do
+  version node['taurus']['ab']['version'] if node['taurus']['ab']['version']
+  action :install
 end

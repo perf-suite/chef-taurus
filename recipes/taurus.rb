@@ -44,6 +44,6 @@ template "#{node['taurus']['home']}/.bzt-rc" do
 end
 
 python_pip 'bzt' do
-  version node['taurus']['version']
+  version node['taurus']['version'] if node['taurus']['version']
   action :install
 end
