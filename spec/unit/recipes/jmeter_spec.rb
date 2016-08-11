@@ -40,4 +40,12 @@ describe 'taurus::jmeter' do
       mode: '0755'
     )
   end
+
+  it 'creates jmeter-service directory' do
+    expect(chef_run).to create_directory('/var/log/jmeter-service')
+  end
+
+  it 'creates runit_service[jmeter-service]' do
+    expect(chef_run).to enable_runit_service('jmeter-service')
+  end
 end

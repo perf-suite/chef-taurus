@@ -41,6 +41,25 @@ plugin_list.each do |plugin_name|
   end
 end
 
+# JMeter Server (runit) for Distributed
+if node['taurus']['jmeter_service']
+  include_recipe 'runit'
+
+  directory node['taurus']['jmeter']['log_dir'] do
+    action :create
+    owner node['taurus']['user']
+    group node['taurus']['group']
+    recursive true
+  end
+
+  runit_service 'jmeter-service' do
+    supervisor_owner node['taurus']['user']
+    supervisor_group node['taurus']['group']
+    sv_timeout 15
+    default_logger true
+  end
+end
+
 # TODO: support jar files for mysql, activemq, plugins manager, etc
 #
 # ark 'connector' do

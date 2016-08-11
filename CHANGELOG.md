@@ -1,6 +1,10 @@
 taurus CHANGELOG
 ==============================
 
+# 2.5.0
+
+Add jmeter server support via runit. Updated documentation.
+
 # 2.4.2
 
 Hotfix for spec test, de-duplicate jmeter-plugin ark downloads (remove CHEF-3694 warnings)
