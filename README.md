@@ -10,7 +10,7 @@ This cookbook installs and configures a system with taurus to execute performanc
 Includes support for the following Open Source Performance Tools
 
 - [Apache Benchmark][19]
-- [Apache JMeter][4] using [best practices][5]
+- [Apache JMeter][4] using [best practices][5] with [runit service][24] for [server mode][23]
 - [Gatling][18]
 - [Locustio locust][6] using [installation instructions][7]
 - [Siege][17]
@@ -40,6 +40,7 @@ Key | Type | Description | Default
 ['taurus']['erlang']['gui_tools'] | String | (Tsung) Whether to install the GUI tools for Erlang | 'false'
 ['taurus']['erlang']['install_method'] | String | (Tsung) Erlang installation method | 'package'
 ['taurus']['jmeter_support'] | Bool | Enable support for Apache JMeter | 'true'
+['taurus']['jmeter_service'] | Bool | Install JMeter as a Service (runit) to support distributed mode | 'false'
 ['taurus']['locustio_support'] | Bool | Enable support for Locust | 'true'
 ['taurus']['ab_support'] | Bool | Enable support for Apache Benchmark | 'true'
 ['taurus']['siege_support'] | Bool | Enable support for Siege | 'true'
@@ -50,7 +51,7 @@ Key | Type | Description | Default
 ['taurus']['home'] | String | Home Folder for User | '/opt/taurus'
 ['taurus']['version'] | String | Specific version of Taurus to install | '1.6.1
 
-[Apache JMeter][4] 
+[Apache JMeter][4]
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
@@ -59,7 +60,15 @@ Key | Type | Description | Default
 ['taurus']['jmeter']['mirror_source'] | String | Website to pull packages | 'https://archive.apache.org/dist/jmeter/binaries'
 ['taurus']['jmeter']['source_url'] | String | Download link for Apache JMeter | "#{node['taurus']['jmeter']['mirror_source']}/apache-jmeter-#{node['taurus']['jmeter']['version']}.zip"
 
-[Apache JMeter Plugins][22] 
+[JMeter Server (runit) for Distributed][23]
+
+Key | Type | Description | Default
+--- | ---- | ----------- | -------
+['taurus']['jmeter']['plugins']['server_rmi_port'] | String | RMI Server Port to Listen on | '1098'
+['taurus']['jmeter']['plugins']['client_rmi_port'] | String | RMI Server Port to Listen on | '1099'
+['taurus']['jmeter']['plugins']['log_dir'] | String | JMeter Service Log Folder | '/var/log/jmeter-service'
+
+[Apache JMeter Plugins][22]
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
@@ -69,10 +78,14 @@ Key | Type | Description | Default
 
 - [Apache Benchmark][19] attributes
 
+Key | Type | Description | Default
+--- | ---- | ----------- | -------
 ['taurus']['ab']['version'] | String | Version of Apache Benchmark| 'nil'
 
 [Gatling][18] attributes
 
+Key | Type | Description | Default
+--- | ---- | ----------- | -------
 ['taurus']['gatling']['version'] | String | Version of Gatling| '2.1.7'
 ['taurus']['gatling']['path'] | String | Default path to install Gatling | '/opt/taurus/tools/gatling'
 ['taurus']['gatling']['mirror_source'] | String | Website to pull packages | 'https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/#{node['taurus']['gatling']['version']}'
@@ -86,6 +99,8 @@ Key | Type | Description | Default
 
 - [Siege][17] attributes
 
+Key | Type | Description | Default
+--- | ---- | ----------- | -------
 ['taurus']['siege']['version'] | String | Version of Siege| 'nil'
 
 - [Tsung][14] attributes
@@ -130,5 +145,5 @@ Maintainers
 [20]: https://github.com/chef-cookbooks/apt
 [21]: https://supermarket.chef.io/cookbooks/taurus
 [22]: http://jmeter-plugins.org
-
-
+[23]: http://jmeter.apache.org/usermanual/remote-test.html
+[24]: https://github.com/chef-cookbooks/runit

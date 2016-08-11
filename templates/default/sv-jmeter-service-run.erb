@@ -1,0 +1,20 @@
+#!/bin/sh
+#
+# Based on http://jmeter.apache.org/usermanual/remote-test.html
+
+# By default, RMI uses a dynamic port for the JMeter server engine
+# define server.rmi.localport to control this port number
+#
+# define client.rmi.localport
+#  default: 1099
+
+exec 2>&1
+exec chpst -u <%= node['taurus']['user'] %> \
+/usr/bin/env \
+JMETER_HOME="<%= node['taurus']['jmeter']['path'] %>" \
+"<%= node['taurus']['jmeter']['path'] %>/bin/jmeter" \
+-Djava.rmi.server.hostname=<%= node['ipaddress']	 %> \
+-Dserver.rmi.localport="<%= node['taurus']['jmeter']['server_rmi_port'] %>" \
+-Dclient.rmi.localport="<%= node['taurus']['jmeter']['client_rmi_port'] %>" \
+--jmeterlogfile "<%= node['taurus']['jmeter']['log_dir'] %>/jmeter.log" \
+--server

@@ -6,6 +6,7 @@ default['erlang']['gui_tools'] = false
 default['erlang']['install_method'] = 'package'
 
 default['taurus']['jmeter_support'] = true
+default['taurus']['jmeter_service'] = true
 default['taurus']['locustio_support'] = true
 default['taurus']['ab_support'] = true
 default['taurus']['siege_support'] = true
@@ -37,6 +38,11 @@ default['taurus']['jmeter']['version'] = '3.0'
 default['taurus']['jmeter']['path'] = "#{node['taurus']['home']}/tools/jmeter"
 default['taurus']['jmeter']['mirror_source'] = 'https://archive.apache.org/dist/jmeter/binaries'
 default['taurus']['jmeter']['source_url'] = "#{node['taurus']['jmeter']['mirror_source']}/apache-jmeter-#{node['taurus']['jmeter']['version']}.zip"
+
+# JMeter Server (runit) for Distributed
+default['taurus']['jmeter']['server_rmi_port'] = '1098'
+default['taurus']['jmeter']['client_rmi_port'] = '1099'
+default['taurus']['jmeter']['log_dir'] = '/var/log/jmeter-service'
 
 # JMeter plugins
 default['taurus']['jmeter']['plugins']['version'] = '1.4.0'
