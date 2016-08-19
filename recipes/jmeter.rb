@@ -53,10 +53,9 @@ if node['taurus']['jmeter_service']
   end
 
   runit_service 'jmeter-service' do
-    supervisor_owner node['taurus']['user']
-    supervisor_group node['taurus']['group']
     sv_timeout 15
     default_logger true
+    action :create
   end
 end
 
