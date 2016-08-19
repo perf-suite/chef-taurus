@@ -1,0 +1,4 @@
+#!/bin/sh
+exec chpst -u <%= node['taurus']['user'] %> \
+svlogd -tt <%= node['taurus']['locustio']['log_dir'] %>
+

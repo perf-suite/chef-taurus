@@ -1,0 +1,23 @@
+#!/bin/sh
+#
+# Based on http://docs.locust.io/en/latest/running-locust-distributed.html
+#
+# Master Server uses two ports for inter-communication
+#  default: 5557 and 5558
+# 
+
+exec 2>&1
+exec chpst -u <%= node['taurus']['user'] %> \
+/usr/bin/env locust \
+<% if node['taurus']['locustio']['master_host'] == node['ipaddress'] -%>
+--master \
+--master-bind-host=<%= node['ipaddress'] %> \
+--master-bind-port=<%= node['taurus']['locustio']['master_port'] %> \
+<% else -%>
+--slave \
+--master-host=<%= node['taurus']['locustio']['master_host'] %> \
+--master-port=<%= node['taurus']['locustio']['master_port'] %> \
+<% end -%>
+-f "<%= node['taurus']['home'] %>/taurus_locustfile.py" \
+--logfile="<%= node['taurus']['locustio']['log_dir'] %>/locustio.log"
+

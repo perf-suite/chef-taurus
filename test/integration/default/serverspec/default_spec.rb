@@ -79,7 +79,7 @@ end
 
 describe command('siege --version 2>&1') do
   its(:exit_status) { should eq 0 }
-  its(:stdout) { should match %r{SIEGE 3} }
+  its(:stdout) { should match %r{SIEGE} }
 end
 
 describe file('/opt/taurus/tools/gatling') do

@@ -12,7 +12,7 @@ Includes support for the following Open Source Performance Tools
 - [Apache Benchmark][19]
 - [Apache JMeter][4] using [best practices][5] with [runit service][24] for [server mode][23]
 - [Gatling][18]
-- [Locustio locust][6] using [installation instructions][7]
+- [Locustio locust][6] using [installation instructions][7] with [runit service][24] for [distributed mode][25]
 - [Siege][17]
 - [Tsung][14] using [installation instructions][15]
 
@@ -42,6 +42,7 @@ Key | Type | Description | Default
 ['taurus']['jmeter_support'] | Bool | Enable support for Apache JMeter | 'true'
 ['taurus']['jmeter_service'] | Bool | Install JMeter as a Service (runit) to support distributed mode | 'false'
 ['taurus']['locustio_support'] | Bool | Enable support for Locust | 'true'
+['taurus']['locustio_service'] | Bool | Install LocustIO as a Service (runit) to support distributed mode | 'false'
 ['taurus']['ab_support'] | Bool | Enable support for Apache Benchmark | 'true'
 ['taurus']['siege_support'] | Bool | Enable support for Siege | 'true'
 ['taurus']['gatling_support'] | Bool | Enable support for Gatling | 'true'
@@ -97,6 +98,15 @@ Key | Type | Description | Default
 --- | ---- | ----------- | -------
 ['taurus']['locustio']['version'] | String | Version of Locust to install| '0.7.5'
 
+[Locustio Server (runit) for Distributed][25]
+
+Key | Type | Description | Default
+--- | ---- | ----------- | -------
+['taurus']['locustio']['master_host'] | String | Hostname or IP of the master node | 'nil'
+['taurus']['locustio']['master_port'] | String | Master Port to Listen on | '5557'
+['taurus']['locustio']['web_port'] | String | Master Web Service Port to Listen on | '8089'
+['taurus']['locustio']['log_dir'] | String | LocustIO Service Log Folder | '/var/log/locustio-service'
+
 - [Siege][17] attributes
 
 Key | Type | Description | Default
@@ -147,3 +157,4 @@ Maintainers
 [22]: http://jmeter-plugins.org
 [23]: http://jmeter.apache.org/usermanual/remote-test.html
 [24]: https://github.com/chef-cookbooks/runit
+[25]: http://docs.locust.io/en/latest/running-locust-distributed.html

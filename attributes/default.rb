@@ -6,8 +6,9 @@ default['erlang']['gui_tools'] = false
 default['erlang']['install_method'] = 'package'
 
 default['taurus']['jmeter_support'] = true
-default['taurus']['jmeter_service'] = true
+default['taurus']['jmeter_service'] = false
 default['taurus']['locustio_support'] = true
+default['taurus']['locustio_service'] = false
 default['taurus']['ab_support'] = true
 default['taurus']['siege_support'] = true
 default['taurus']['gatling_support'] = true
@@ -51,6 +52,12 @@ default['taurus']['jmeter']['plugins']['mirror_source'] = 'http://jmeter-plugins
 
 # LocustIO
 default['taurus']['locustio']['version'] = '0.7.5'
+
+# LocustIO Server (runit) for Distributed
+default['taurus']['locustio']['master_host'] = nil
+default['taurus']['locustio']['master_port'] = '5557'
+default['taurus']['locustio']['web_port'] = '8089'
+default['taurus']['locustio']['log_dir'] = '/var/log/locustio-service'
 
 # Apache Benchmark
 default['taurus']['ab']['version'] = nil

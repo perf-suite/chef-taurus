@@ -1,6 +1,10 @@
 taurus CHANGELOG
 ==============================
 
+# 2.6.0
+
+Add locustio server support via runit. Updated documentation.
+
 # 2.5.0
 
 Add jmeter server support via runit. Updated documentation.

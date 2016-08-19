@@ -21,12 +21,3 @@ describe command('/opt/taurus/tools/jmeter/bin/jmeter --version') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match %r{3.0} }
 end
-
-describe package('runit') do
-  it { should be_installed }
-end
-
-describe command('sv status jmeter-service') do
-  its(:exit_status) { should eq(0) }
-  its(:stdout) { should match(/^run: jmeter-service/) }
-end
