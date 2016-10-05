@@ -1,13 +1,27 @@
 require 'chefspec'
 require 'chefspec/berkshelf'
 require_relative './unit/support/matchers/ark_matchers'
+# warn
+LOG_LEVEL = :error
+CENTOS_OPTS = {
+  platform: 'centos',
+  version: '7.2.1511',
+  log_level: LOG_LEVEL
+}.freeze
+UBUNTU_OPTS = {
+  platform: 'ubuntu',
+  version: '16.04',
+  log_level: LOG_LEVEL
+}.freeze
 
-at_exit { ChefSpec::Coverage.report! }
+CHEFSPEC_OPTS = UBUNTU_OPTS
 
 RSpec.configure do |config|
-  config.platform = 'centos'
-  config.version = '7.1.1503'
-  config.order = 'random'
-  config.filter_run focus: true
-  config.run_all_when_everything_filtered = true
+  config.formatter = :documentation
+  config.color = true
+  config.log_level = :info
+  config.platform = 'ubuntu'
+  config.version = '16.04'
 end
+
+at_exit { ChefSpec::Coverage.report! }

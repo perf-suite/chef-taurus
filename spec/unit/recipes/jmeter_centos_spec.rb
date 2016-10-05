@@ -1,14 +1,14 @@
 require 'spec_helper'
 
 describe 'taurus::jmeter' do
-  context 'ubuntu' do
-    let(:runner) { ChefSpec::SoloRunner.new(CHEFSPEC_OPTS) }
+  context 'centos' do
+    let(:runner) { ChefSpec::SoloRunner.new(CENTOS_OPTS) }
     let(:node) { runner.node }
     let(:chef_run) { runner.converge(described_recipe) }
 
     included_recipes = %w(java)
-    installed_package = %w(openjdk-7-jdk)
-    omitted_package = %w(java-jre)
+    installed_package = %w(java-1.7.0-openjdk java-1.7.0-openjdk-devel)
+    omitted_package = %w(openjdk-7-jdk)
 
     included_recipes.each do |r|
       it "includes the recipe #{r}" do
@@ -64,7 +64,7 @@ describe 'taurus::jmeter' do
       expect(chef_run).not_to render_file('/etc/service/jmeter-service/control/d').with_content('pkill -f \'^java.*ApacheJMeter.jar\'')
     end
 
-    it 'does not create directory /var/log/jmeter-service' do
+    it 'does not create  directory /var/log/jmeter-service' do
       expect(chef_run).not_to create_directory('/var/log/jmeter-service')
     end
   end

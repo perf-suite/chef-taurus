@@ -5,26 +5,22 @@
 
 include_recipe 'java'
 
-directory node['taurus']['jmeter']['path'] do
-  action :create
-  owner node['taurus']['user']
-  group node['taurus']['group']
-  recursive true
-end
-
 ark 'jmeter' do
   url node['taurus']['jmeter']['source_url']
-  path "#{node['taurus']['home']}/tools"
-  owner node['taurus']['user']
-  action :put
+  version node['taurus']['jmeter']['version']
+  path node['taurus']['jmeter']['path']
+  has_binaries ['bin/jmeter', 'bin/jmeter-server', 'bin/ApacheJMeter.jar']
+  append_env_path true
+  action :install
 end
 
-jmeter_binaries = ['bin/jmeter', 'bin/jmeter-server', 'bin/ApacheJMeter.jar']
-
-jmeter_binaries.each do |binary_name|
-  file "#{node['taurus']['jmeter']['path']}/#{binary_name}" do
-    mode '0755'
-  end
+template "#{node['taurus']['jmeter']['path']}/bin/user.properties" do
+  variables(
+    jmeter_server_rmi_port: node['taurus']['jmeter']['server_rmi_port'],
+    jmeter_client_rmi_port: node['taurus']['jmeter']['client_rmi_port']
+  )
+  source 'jmeter-user-properties.erb'
+  mode '0644'
 end
 
 plugin_mirror = node['taurus']['jmeter']['plugins']['mirror_source']
@@ -36,7 +32,6 @@ plugin_list.each do |plugin_name|
   ark "jmeter-plugin-#{plugin_name}" do
     url "#{plugin_mirror}/#{plugin_url}"
     path "#{node['taurus']['jmeter']['path']}/lib"
-    owner node['taurus']['user']
     action :dump
   end
 end
@@ -56,6 +51,14 @@ if node['taurus']['jmeter_service']
     sv_timeout 15
     default_logger true
     action :create
+  end
+
+  template '/etc/service/jmeter-service/control/d' do
+    source 'sv-jmeter-service-down.erb'
+    owner 'root'
+    group 'root'
+    mode '0744'
+    notifies :restart, 'runit_service[jmeter-service]'
   end
 end
 

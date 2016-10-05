@@ -17,16 +17,23 @@ directory node['taurus']['home'] do
   action :create
   owner node['taurus']['user']
   group node['taurus']['group']
-  mode '0700'
+  mode '0755'
 end
 
-directory "#{node['taurus']['home']}/.bzt" do
+python_pip 'bzt' do
+  version node['taurus']['version'] if node['taurus']['version']
+  options node['taurus']['python']['pip_options'] if node['taurus']['python']['pip_options']
+  action :install
+end
+
+directory node['taurus']['conf_dir'] do
   action :create
-  owner node['taurus']['user']
-  group node['taurus']['group']
+  owner 'root'
+  group 'root'
+  mode '0755'
 end
 
-template "#{node['taurus']['home']}/.bzt-rc" do
+template "#{node['taurus']['conf_dir']}/#{node['taurus']['conf_file']}" do
   variables(
     check_updates: node['taurus']['settings']['check-updates'],
     check_interval: node['taurus']['settings']['check-interval'],
@@ -38,12 +45,5 @@ template "#{node['taurus']['home']}/.bzt-rc" do
     gatling_path: node['taurus']['gatling']['path']
   )
   source 'bzt-rc.erb'
-  owner node['taurus']['user']
-  group node['taurus']['group']
-  mode '0755'
-end
-
-python_pip 'bzt' do
-  version node['taurus']['version'] if node['taurus']['version']
-  action :install
+  mode '0644'
 end

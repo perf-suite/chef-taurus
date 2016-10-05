@@ -1,13 +1,13 @@
 require 'spec_helper'
 
 describe 'taurus::ab' do
-  context 'ubuntu' do
-    let(:runner) { ChefSpec::SoloRunner.new(CHEFSPEC_OPTS) }
+  context 'centos' do
+    let(:runner) { ChefSpec::SoloRunner.new(CENTOS_OPTS) }
     let(:node) { runner.node }
     let(:chef_run) { runner.converge(described_recipe) }
 
-    installed_package = %w(apache2-utils)
-    omitted_package = %w(httpd-tools)
+    installed_package = %w(httpd-tools)
+    omitted_package = %w(apache2-utils)
 
     installed_package.each do |p|
       it "installs the package #{p}" do

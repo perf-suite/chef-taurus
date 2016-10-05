@@ -1,11 +1,16 @@
 require 'spec_helper'
 
 describe 'taurus::default' do
-  context 'ubuntu' do
+  context 'centos' do
     context 'When all attributes are default' do
-      let(:runner) { ChefSpec::SoloRunner.new(CHEFSPEC_OPTS) }
+      let(:runner) { ChefSpec::SoloRunner.new(CENTOS_OPTS) }
       let(:node) { runner.node }
-      let(:chef_run) { runner.converge(described_recipe) }
+      let(:chef_run) do
+        runner.node.set['platform'] = 'centos'
+        runner.node.set['yum']['epel']['enabled'] = true
+
+        runner.converge(described_recipe)
+      end
 
       included_recipes = [
         'taurus::_common',

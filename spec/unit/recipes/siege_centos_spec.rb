@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe 'taurus::siege' do
-  context 'ubuntu' do
-    let(:runner) { ChefSpec::SoloRunner.new(CHEFSPEC_OPTS) }
+  context 'centos' do
+    let(:runner) { ChefSpec::SoloRunner.new(CENTOS_OPTS) }
     let(:node) { runner.node }
     let(:chef_run) { runner.converge(described_recipe) }
 

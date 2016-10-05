@@ -5,7 +5,9 @@ settings:
   default-executor: <%= @default_executor %>
   artifacts-dir: <%= @artifacts_dir %>
 
+<% if @jmeter_support || @gatling_support %>
 modules:
+<% end %>
 <% if @jmeter_support %>
   jmeter:
     path: <%= @jmeter_path %>
