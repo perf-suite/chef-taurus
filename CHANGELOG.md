@@ -1,6 +1,10 @@
 taurus CHANGELOG
 ==============================
 
+# 3.0.1
+
+Fix knife-supermarket requirement for single version constraint for a particular cookbook.
+
 # 3.0.0
 
 Added firewall_support, added runit down scripts, moved taurus config to global, moved jmeter
