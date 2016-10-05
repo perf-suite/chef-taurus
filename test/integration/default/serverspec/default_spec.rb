@@ -14,7 +14,14 @@ describe file('/opt/taurus') do
   it { should be_directory }
   it { should be_owned_by 'taurus' }
   it { should be_grouped_into 'taurus' }
-  it { should be_mode 700 }
+  it { should be_mode 755 }
+end
+
+describe file('/etc/bzt.d') do
+  it { should be_directory }
+  it { should be_owned_by 'root' }
+  it { should be_grouped_into 'root' }
+  it { should be_mode 755 }
 end
 
 content = [
@@ -23,26 +30,26 @@ content = [
   '  check-updates: false',
   '  check-interval: 5s',
   '  default-executor: jmeter',
-  '  artifacts-dir: /tmp/taurus-%Y-%m-%d_%H-%M-%S.%f',
+  '  artifacts-dir: taurus-%Y-%m-%d_%H-%M-%S.%f',
   '',
   'modules:',
   '  jmeter:',
-  '    path: /opt/taurus/tools/jmeter',
+  '    path: /usr/local/jmeter-3.0',
   '  gatling:',
-  '    path: /opt/taurus/tools/gatling'
+  '    path: /usr/local/gatling-2.1.7'
 ].join("\n") << "\n"
 
-describe file('/opt/taurus/.bzt-rc') do
+describe file('/etc/bzt.d/66-chef.yml') do
   it { should be_file }
-  it { should be_owned_by 'taurus' }
-  it { should be_grouped_into 'taurus' }
-  it { should be_mode 755 }
+  it { should be_owned_by 'root' }
+  it { should be_grouped_into 'root' }
+  it { should be_mode 644 }
   its(:content) { should eq content }
 end
 
 describe command('bzt -h') do
   its(:exit_status) { should eq 0 }
-  its(:stdout) { should match %r{BlazeMeter Taurus Tool v1.6.1} }
+  its(:stdout) { should match %r{BlazeMeter Taurus Tool v1.6} }
 end
 
 describe command('/usr/bin/java -version') do
@@ -56,13 +63,7 @@ describe file('/etc/profile.d/jdk.sh') do
   its(:content) { should contain 'export JAVA_HOME' }
 end
 
-describe file('/opt/taurus/tools/jmeter') do
-  it { should be_directory }
-  it { should be_owned_by 'taurus' }
-  it { should be_mode 755 }
-end
-
-describe command('/opt/taurus/tools/jmeter/bin/jmeter --version') do
+describe command('/usr/local/jmeter-3.0/bin/jmeter --version') do
   its(:exit_status) { should eq 0 }
   its(:stdout) { should match %r{3.0} }
 end
@@ -82,15 +83,9 @@ describe command('siege --version 2>&1') do
   its(:stdout) { should match %r{SIEGE} }
 end
 
-describe file('/opt/taurus/tools/gatling') do
-  it { should be_directory }
-  it { should be_owned_by 'taurus' }
-  it { should be_mode 755 }
-end
-
-describe command('/opt/taurus/tools/gatling/bin/gatling.sh --help 2>&1') do
+describe command('sh /usr/local/gatling-2.1.7/bin/gatling.sh --help 2>&1') do
   its(:exit_status) { should eq 0 }
-  its(:stdout) { should match %r{GATLING_HOME is set to /opt/taurus/tools/gatling} }
+  its(:stdout) { should match %r{GATLING_HOME is set to /usr/local/gatling-2.1.7} }
 end
 
 describe command('erl -eval \'erlang:display(erlang:system_info(otp_release)), halt().\'  -noshell 2>&1') do

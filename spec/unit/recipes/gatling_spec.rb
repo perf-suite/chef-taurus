@@ -1,29 +1,28 @@
 require 'spec_helper'
 
 describe 'taurus::gatling' do
-  let(:chef_run) do
-    ChefSpec::ServerRunner.new(step_into: ['taurus']).converge('taurus::gatling')
-  end
-  it { expect(chef_run).to include_recipe('java') }
+  context 'ubuntu' do
+    let(:runner) { ChefSpec::SoloRunner.new(CHEFSPEC_OPTS) }
+    let(:node) { runner.node }
+    let(:chef_run) { runner.converge(described_recipe) }
 
-  # it { expect(chef_run).to install_package('openjdk-7-jdk') }
+    included_recipes = %w(java)
+    installed_package = %w(openjdk-7-jdk)
 
-  it 'creates gatling directory' do
-    expect(chef_run).to create_directory('/opt/taurus/tools/gatling')
-  end
+    included_recipes.each do |r|
+      it "includes the recipe #{r}" do
+        expect(chef_run).to include_recipe(r)
+      end
+    end
 
-  it 'downloads gatling' do
-    expect(chef_run).to put_ark('gatling')
-  end
+    installed_package.each do |p|
+      it "installs the package #{p}" do
+        expect(chef_run).to install_package(p)
+      end
+    end
 
-  it 'sets bin/gatling.sh perms to 755' do
-    expect(chef_run).to create_file('/opt/taurus/tools/gatling/bin/gatling.sh').with(
-      mode: '0755'
-    )
-  end
-  it 'sets bin/recorder.sh perms to 755' do
-    expect(chef_run).to create_file('/opt/taurus/tools/gatling/bin/recorder.sh').with(
-      mode: '0755'
-    )
+    it 'downloads and installs gatling' do
+      expect(chef_run).to install_ark('gatling')
+    end
   end
 end

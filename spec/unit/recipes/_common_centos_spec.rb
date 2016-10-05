@@ -1,22 +1,22 @@
 require 'spec_helper'
 
 describe 'taurus::_common' do
-  context 'ubuntu' do
-    let(:runner) { ChefSpec::SoloRunner.new(CHEFSPEC_OPTS) }
+  context 'centos' do
+    let(:runner) { ChefSpec::SoloRunner.new(CENTOS_OPTS) }
     let(:node) { runner.node }
     let(:chef_run) { runner.converge(described_recipe) }
 
-    included_recipes = %w(apt ark build-essential python)
-    excluded_recipes = %w(yum-epel firewall)
+    included_recipes = %w(yum-epel ark build-essential python)
+    excluded_recipes = %w(apt firewall)
     installed_package = [
-      'python-dev',
+      'python-devel',
       'python-pip',
       'python-virtualenv',
-      'libxml2-dev',
-      'libxslt1-dev',
-      'zlib1g'
+      'libxml2-devel',
+      'libxslt-devel',
+      'zlib'
     ]
-    omitted_package = %w(python-devel libxml2-devel libxslt-devel zlib)
+    omitted_package = %w(python-dev libxml2-dev libxslt1-dev zlib1g)
     installed_python_pip = %w(lxml psutil pyzmq gevent)
     omitted_python_pip = %w(lxml2)
 

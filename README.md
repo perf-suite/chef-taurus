@@ -25,7 +25,7 @@ The dependency cookbooks are:
 - [ark][9]
 - [build-essential][13]
 - [apt][20]
-- [yum-epel][12]
+- [yum-epel][12] '= 1.0.1' with  'yum = 3.13.0'
 - [java][10]
 - [python][11]
 - [erlang][16]
@@ -36,6 +36,7 @@ The dependency cookbooks are:
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
+['taurus']['firewall_support'] | Bool | Turn on firewall support | 'false'
 ['taurus']['jdk_version'] | String | Version of JDK to install | '7'
 ['taurus']['erlang']['gui_tools'] | String | (Tsung) Whether to install the GUI tools for Erlang | 'false'
 ['taurus']['erlang']['install_method'] | String | (Tsung) Erlang installation method | 'package'
@@ -50,14 +51,16 @@ Key | Type | Description | Default
 ['taurus']['user'] | String | User for executing load test | 'taurus'
 ['taurus']['group'] | String | Group associated to running load test | 'taurus'
 ['taurus']['home'] | String | Home Folder for User | '/opt/taurus'
-['taurus']['version'] | String | Specific version of Taurus to install | '1.6.1
+['taurus']['version'] | String | Specific version of Taurus to install | '1.6.8'
+['taurus']['conf_dir'] | String | Location to store Taurus configs globally | '/etc/bzt.d'
+['taurus']['conf_config'] | String | Filename of Taurus config | '66-chef.yml'
 
 [Apache JMeter][4]
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
 ['taurus']['jmeter']['version'] | String | Version of Apache JMeter to install | '3.0'
-['taurus']['jmeter']['path'] | String | Default path to install Apache JMeter | '/opt/taurus/tools/jmeter'
+['taurus']['jmeter']['path'] | String | Default path to install Apache JMeter | '/usr/local/jmeter-3.0'
 ['taurus']['jmeter']['mirror_source'] | String | Website to pull packages | 'https://archive.apache.org/dist/jmeter/binaries'
 ['taurus']['jmeter']['source_url'] | String | Download link for Apache JMeter | "#{node['taurus']['jmeter']['mirror_source']}/apache-jmeter-#{node['taurus']['jmeter']['version']}.zip"
 
@@ -77,7 +80,7 @@ Key | Type | Description | Default
 ['taurus']['jmeter']['plugins']['list'] | Array | Plugins to install for Apache JMeter | 'Standard Extras ExtrasLibs WebDriver XMPP Hadoop'
 ['taurus']['jmeter']['plugins']['mirror_source'] | String | Website to pull packages | 'http://jmeter-plugins.org/files'
 
-- [Apache Benchmark][19] attributes
+[Apache Benchmark][19] attributes
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
@@ -88,7 +91,7 @@ Key | Type | Description | Default
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
 ['taurus']['gatling']['version'] | String | Version of Gatling| '2.1.7'
-['taurus']['gatling']['path'] | String | Default path to install Gatling | '/opt/taurus/tools/gatling'
+['taurus']['gatling']['path'] | String | Default path to install Gatling | '/usr/local/gatling-2.1.7'
 ['taurus']['gatling']['mirror_source'] | String | Website to pull packages | 'https://repo1.maven.org/maven2/io/gatling/highcharts/gatling-charts-highcharts-bundle/#{node['taurus']['gatling']['version']}'
 ['taurus']['gatling']['source_url'] | String | Download link for Gatling | "#{node['taurus']['gatling']['mirror_source']}/gatling-charts-highcharts-bundle-#{node['taurus']['gatling']['version']}-bundle.zip"
 
@@ -107,13 +110,13 @@ Key | Type | Description | Default
 ['taurus']['locustio']['web_port'] | String | Master Web Service Port to Listen on | '8089'
 ['taurus']['locustio']['log_dir'] | String | LocustIO Service Log Folder | '/var/log/locustio-service'
 
-- [Siege][17] attributes
+[Siege][17] attributes
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------
 ['taurus']['siege']['version'] | String | Version of Siege| 'nil'
 
-- [Tsung][14] attributes
+[Tsung][14] attributes
 
 Key | Type | Description | Default
 --- | ---- | ----------- | -------

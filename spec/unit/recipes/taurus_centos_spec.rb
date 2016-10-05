@@ -2,8 +2,8 @@
 require 'spec_helper'
 
 describe 'taurus::taurus' do
-  context 'ubuntu' do
-    let(:runner) { ChefSpec::SoloRunner.new(CHEFSPEC_OPTS) }
+  context 'centos' do
+    let(:runner) { ChefSpec::SoloRunner.new(CENTOS_OPTS) }
     let(:node) { runner.node }
     let(:chef_run) { runner.converge(described_recipe) }
 
@@ -44,9 +44,9 @@ describe 'taurus::taurus' do
       end
     end
 
-    omitted_python_pip.each do |t|
-      it "does not install the python pip #{t}" do
-        expect(chef_run).to_not install_python_pip(t)
+    omitted_python_pip.each do |p|
+      it "does not install the python pip #{p}" do
+        expect(chef_run).to_not install_python_pip(p)
       end
     end
   end

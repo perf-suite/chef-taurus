@@ -1,13 +1,13 @@
 require 'spec_helper'
 
-describe 'taurus::tsung' do
-  context 'ubuntu' do
-    let(:runner) { ChefSpec::SoloRunner.new(CHEFSPEC_OPTS) }
+describe 'taurus::gatling' do
+  context 'centos' do
+    let(:runner) { ChefSpec::SoloRunner.new(CENTOS_OPTS) }
     let(:node) { runner.node }
     let(:chef_run) { runner.converge(described_recipe) }
 
-    included_recipes = %w(erlang)
-    installed_package = %w(erlang-nox)
+    included_recipes = %w(java)
+    installed_package = %w(java-1.7.0-openjdk java-1.7.0-openjdk-devel)
 
     included_recipes.each do |r|
       it "includes the recipe #{r}" do
@@ -21,8 +21,8 @@ describe 'taurus::tsung' do
       end
     end
 
-    it 'downloads and installs tsung' do
-      expect(chef_run).to install_with_make_ark('tsung')
+    it 'downloads and installs gatling' do
+      expect(chef_run).to install_ark('gatling')
     end
   end
 end
