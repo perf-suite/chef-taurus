@@ -1,0 +1,49 @@
+driver:
+  name: docker
+  privileged: true
+
+
+provisioner:
+  name: chef_zero
+  require_chef_omnibus: 12.9.41
+  attributes:
+    firewall:
+      allow_ssh: true
+
+platforms:
+  - name: centos-7.2
+  - name: ubuntu-16.04
+
+suites:
+  - name: default
+    run_list:
+      - recipe[taurus::default]
+  - name: jmeter_service
+    run_list:
+      - recipe[taurus::default]
+    attributes:
+      taurus:
+        firewall_support: true
+        jmeter_service: true
+        locustio_service: false
+        jmeter_support: true
+        locustio_support: false
+        ab_support: false
+        siege_support: false
+        gatling_support: false
+        tsung_support: false
+  - name: locustio_service
+    run_list:
+      - recipe[taurus::default]
+    attributes:
+      taurus:
+        firewall_support: true
+        jmeter_service: false
+        locustio_service: true
+        jmeter_support: false
+        locustio_support: true
+        ab_support: false
+        siege_support: false
+        gatling_support: false
+        tsung_support: false
+
