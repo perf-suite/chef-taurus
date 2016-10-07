@@ -25,6 +25,12 @@ group :kitchen_vagrant do
   gem 'kitchen-vagrant', '0.20.0'
 end
 
+group :kitchen_docker do
+  gem 'docker'
+  gem 'chef-provisioning-docker'
+  gem 'kitchen-docker'
+end
+
 group :kitchen_cloud do
   gem 'kitchen-ec2', '1.0.0'
 end
@@ -35,5 +41,5 @@ group :development do
   gem 'guard-foodcritic'
   gem 'guard-rspec'
   gem 'guard-rubocop'
-  gem 'rake', '11.2.2'
+  gem 'rake', '11.3.0'
 end

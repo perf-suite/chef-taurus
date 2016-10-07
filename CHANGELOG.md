@@ -1,6 +1,11 @@
 taurus CHANGELOG
 ==============================
 
+# 3.0.2
+
+Add support for docker kitchen testing. 
+Removed yum-epel pin, yum pin remains which should be < 4.0.0 at this time.
+
 # 3.0.1
 
 Fix knife-supermarket requirement for single version constraint for a particular cookbook.
